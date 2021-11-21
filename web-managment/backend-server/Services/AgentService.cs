@@ -47,7 +47,7 @@ namespace backend.Services
             {
                 if (ex.Message.Contains("duplicate"))
                 {
-                    throw new Exception("duplicate agent");
+                    return this.GetByIpAndHostName(agent.ip, agent.hostName);
                 }
             }
             return agent;

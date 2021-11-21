@@ -32,12 +32,18 @@ namespace agent.api
         {
             using (var client = new HttpClient())
             {
-                string url = GetApiEndpoint("command");
+                string url = GetApiEndpoint("command/all");
                 url = $"{url}";
                 var response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<AgentCommmand>>(responseBody); ;
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<AgentCommmand>>(responseBody); ;
+                }
+                else
+                {
+                    return null;
+                }
             };
         }
 

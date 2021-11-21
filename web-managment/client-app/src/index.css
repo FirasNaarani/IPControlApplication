@@ -8,6 +8,16 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Garamond, serif",
     monospace;
+}
+
+.aboutme {
+  text-shadow: 0 0 3px #2189dc, 0 0 5px #0000ff;
+  font-family: Garamond, serif;
+  text-align: center;
+}
+
+div {
+  font-family: Garamond, serif;
 }

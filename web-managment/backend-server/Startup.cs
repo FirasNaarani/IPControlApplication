@@ -66,11 +66,11 @@ namespace node
                     ValidateAudience = false
                 };
             });
-            services.AddSingleton<IJWTAuthenticationManager>(new JWTAuthenticationManager(tokenKey));
+            services.AddSingleton<IJWTAuthenticationManager>(new JWTAuthenticationManager( tokenKey));
             services.AddSingleton<AuthenticationService>();
             services.AddSingleton<AgentService>();
             services.AddSingleton<CommandService>();
-
+     
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -91,7 +91,7 @@ namespace node
             {
                 endpoints.MapControllers();
             });
-
+            
         }
     }
 }

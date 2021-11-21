@@ -16,7 +16,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
 import ComputerIcon from '@mui/icons-material/Computer';
 import GppBadIcon from '@mui/icons-material/GppBad';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -140,6 +140,12 @@ export default function DashboardLayout({ children, ...restProps }) {
                     <GppBadIcon/>
                 </ListItemIcon>
                 <ListItemText primary="Commands" />
+            </ListItem>
+            <ListItem button key="Support" component={Link} to="/support">
+                <ListItemIcon>
+                    <PrivacyTipIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Support" />
             </ListItem>
         </List>
         <Divider/>

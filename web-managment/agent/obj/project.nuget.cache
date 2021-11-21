@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yC0KmYKga+CwDW6RW3IlptFnotGvVY6S1GZUbTIbwy1odkb3B9UtUyltDY4VsCnAn8IPw28voVs5FhVgc0zWqA==",
+  "dgSpecHash": "giYyI2Sq7AP8PUImmJ4NLruHdSpAs1PeYmUq38G8ixbTispwbmzjyAS/rDpxg0AtJ0xOYrFwDEsPTWNri4Ll+Q==",
   "success": true,
-  "projectFilePath": "C:\\Project Nof\\web-managment\\agent\\agent.csproj",
+  "projectFilePath": "C:\\GitHub\\IPControlApplication\\web-managment\\agent\\agent.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\firas\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\firas\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",

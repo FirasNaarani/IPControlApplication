@@ -21,7 +21,10 @@ namespace backend.Controllers
         }
         [HttpGet]
         public ActionResult<List<AgentCommmand>> Get() =>
-            _commandService.Get();
+            _commandService.GetActive();
+        [HttpGet("all")]
+        public ActionResult<List<AgentCommmand>> GetAll() =>
+            _commandService.GetAll();
 
         [HttpGet("{id:length(24)}", Name = "GetCommand")]
         public ActionResult<Result<AgentCommmand>> Get(string id)
