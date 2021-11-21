@@ -1,0 +1,26 @@
+﻿{
+  "TokenKey": "private key elias elias 123456 fifa cup",
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "ManagerDBSettings": {
+    "ManagerCollectionName": "managers",
+    "ConnectionString": "mongodb://admin:pass@mongo-db:27017/?authSource=admin&readPreference=primary&directConnection=true&ssl=false",
+    "DatabaseName": "blocker"
+  },
+  "AgentDBSettings": {
+    "AgentCollectionName": "agents",
+    "ConnectionString": "mongodb://admin:pass@mongo-db:27017/?authSource=admin&readPreference=primary&directConnection=true&ssl=false",
+    "DatabaseName": "blocker"
+  },
+  "CommandDBSettings": {
+    "CommandCollectionName": "commands",
+    "ConnectionString": "mongodb://admin:pass@mongo-db:27017/?authSource=admin&readPreference=primary&directConnection=true&ssl=false",
+    "DatabaseName": "blocker"
+  },
+  "AllowedHosts": "*"
+}

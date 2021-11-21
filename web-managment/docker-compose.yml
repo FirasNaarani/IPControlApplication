@@ -1,0 +1,55 @@
+version: "3"
+services:
+  mongo-db:
+    container_name: mongo-db
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_DATABASE=auth
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - '27017:27017'
+    networks:
+      - manage-user-app-network
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    depends_on:
+      - mongo-db
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
+      - ME_CONFIG_MONGODB_SERVER=mongo-db
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=pass
+    ports:
+      - '8081:8081'
+    networks:
+      - manage-user-app-network
+  backend-service:
+    container_name: backend-service
+    restart: always
+    build:
+      context: ./backend-server
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - '17200:5000'
+      - '44300:5001'
+    links:
+      - mongo-db
+    networks:
+      - manage-user-app-network 
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client-app
+    ports:
+      - '3006:3000'
+    networks:
+      - manage-user-app-network
+      
+networks:
+ manage-user-app-network:
