@@ -45,9 +45,14 @@ namespace backend.Services
             return _commands.Find(cmd => cmd.dateAdded.CompareTo(lasySync) > 0).ToList();
         }
 
-        public List<AgentCommmand> Get()
+        public List<AgentCommmand> GetAll()
         {
-            return _commands.Find(m => m.isActive).ToList().OrderByDescending(item => item.dateAdded).ToList();
+            return _commands.Find(_ => true).ToList().OrderBy(item => item.dateAdded).ToList();
+        }
+
+        public List<AgentCommmand> GetActive()
+        {
+            return _commands.Find(_ => _.isActive).ToList().OrderByDescending(item => item.dateAdded).ToList();
         }
 
         public void Update(string id, UpdateCommand command)
@@ -70,6 +75,7 @@ namespace backend.Services
                         .Set(_ => _.isActive, false);
             var options = new FindOneAndUpdateOptions<AgentCommmand>();
             _commands.FindOneAndUpdate(filter, update, options);
+           
         }
     }
 }

@@ -5,9 +5,9 @@ namespace agent.services
 {
     public class BlockServiceFactory
     {
-        public static IBlockService Create(AgentCommmand cmd)
+        public static IBlockService Create(ResourceType resourceType)
         {
-            switch(cmd.resourceType)
+            switch(resourceType)
             {
                 case ResourceType.Application:
                     return new ApplicationHandlerService();

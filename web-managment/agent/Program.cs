@@ -8,7 +8,8 @@ namespace agent
     class Program
     {
         static CommandListenerService commandListenerService = new CommandListenerService();
-        static Timer Timer;
+        static Timer timer;
+        static bool isRunning = false;
         static async Task Main(string[] args)
         {
             await commandListenerService.RegisterAgent();
@@ -18,11 +19,18 @@ namespace agent
         static void RunSyncProcess()
         {
             var startTimeSpan = TimeSpan.Zero;
-            var periodTimeSpan = TimeSpan.FromSeconds(1);
-            Timer = new Timer(async (e) =>
+            var periodTimeSpan = TimeSpan.FromSeconds(2);
+            timer = new Timer(async (e) =>
            {
-               Console.WriteLine("running sync agent from API");
+               if (isRunning)
+               {
+                   Console.WriteLine("is running, skipping");
+                   return;
+               }
+               isRunning = true;
+               Console.WriteLine(" =================================== running sync agent from API ===================================");
                await commandListenerService.RunSyncWithAPI();
+               isRunning = false;
            }, null, startTimeSpan, periodTimeSpan);
         }
     }

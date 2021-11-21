@@ -5983,11 +5983,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Project Nof\\web-managment\\agent\\agent.csproj",
+      "projectUniqueName": "C:\\GitHub\\IPControlApplication\\web-managment\\agent\\agent.csproj",
       "projectName": "agent",
-      "projectPath": "C:\\Project Nof\\web-managment\\agent\\agent.csproj",
+      "projectPath": "C:\\GitHub\\IPControlApplication\\web-managment\\agent\\agent.csproj",
       "packagesPath": "C:\\Users\\firas\\.nuget\\packages\\",
-      "outputPath": "C:\\Project Nof\\web-managment\\agent\\obj\\",
+      "outputPath": "C:\\GitHub\\IPControlApplication\\web-managment\\agent\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -6050,7 +6050,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

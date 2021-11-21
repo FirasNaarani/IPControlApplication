@@ -2,6 +2,7 @@
 using agent.api.dto;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -51,43 +52,132 @@ namespace agent.services
                 return;
             }
             List<AgentCommmand> commands = await blockerAPI.getCommandsForSync(agent.Id);
-            Console.WriteLine("Got Commands: " + commands.Count);
-            foreach (AgentCommmand cmd in commands)
+            if (commands != null)
             {
-                try
+                Console.WriteLine("Got Commands: " + commands.Count);
+                foreach (AgentCommmand cmd in commands)
                 {
-                    Console.WriteLine("trying to block: " + cmd.value);
-                    IBlockService blockService = BlockServiceFactory.Create(cmd);
-                    if (cmd.isActive)
+                    try
                     {
-                        if (cmd.operationDurationMinutes == 0)
+                        IBlockService blockService = BlockServiceFactory.Create(cmd.resourceType);
+                        if (cmd.isActive)
                         {
-                            blockService.Block(cmd);
-                        }
-                        else
-                        {
-                            var expirationDate = cmd.dateAdded.AddMinutes(cmd.operationDurationMinutes);
-                            if (DateTime.UtcNow > expirationDate)
+                            if (cmd.operationDurationMinutes == 0)
                             {
-                                blockService.Unblock(cmd);
+                                if (cmd.resourceType.ToString() == "Application")
+                                {
+                                    if (blockService.isBlocked(cmd))
+                                    {
+                                        Console.WriteLine("trying to block(no expiration date): " + cmd.value);
+                                        blockService.Block(cmd);
+                                        Console.WriteLine("blocked: " + cmd.value);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("already blocked: " + cmd.value);
+                                    }
+                                }
+                                else
+                                {
+                                    if (!blockService.isBlocked(cmd))
+                                    {
+                                        Console.WriteLine("trying to block(no expiration date): " + cmd.value);
+                                        blockService.Block(cmd);
+                                        Console.WriteLine("blocked: " + cmd.value);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("already blocked: " + cmd.value);
+                                    }
+                                }
                             }
                             else
                             {
-                                blockService.Block(cmd);
+                                var expirationDate = cmd.dateAdded.AddMinutes(cmd.operationDurationMinutes);
+                                if (DateTime.UtcNow > expirationDate)
+                                {
+                                    Console.WriteLine("trying to unblock expired cmd: " + cmd.value);
+                                    if (blockService.isBlocked(cmd))
+                                    {
+                                        blockService.Unblock(cmd);
+                                        Console.WriteLine("unblocked: " + cmd.value);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("already blocked: " + cmd.value);
+                                    }
+                                }
+                                else
+                                {
+                                    if (cmd.resourceType.ToString() == "Application")
+                                    {
+                                        if (blockService.isBlocked(cmd))
+                                        {
+                                            Console.WriteLine("trying to block: " + cmd.value);
+                                            blockService.Block(cmd);
+                                            Console.WriteLine("blocked: " + cmd.value);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("already blocked: " + cmd.value);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!blockService.isBlocked(cmd))
+                                        {
+                                            Console.WriteLine("trying to block: " + cmd.value);
+                                            blockService.Block(cmd);
+                                            Console.WriteLine("blocked: " + cmd.value);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("already blocked: " + cmd.value);
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("trying to unblock deleted cmd: " + cmd.value);
+                            if (blockService.isBlocked(cmd))
+                            {
+                                blockService.Unblock(cmd);
+                                Console.WriteLine("unblocked: " + cmd.value);
+                                
+                            }
+                            else
+                            {
+                                Console.WriteLine("already blocked: " + cmd.value);
                             }
                         }
-
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        blockService.Unblock(cmd);
+                        Console.WriteLine("block failed: " + ex.Message);
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("block failed: " + ex.Message);
                 }
             }
+            runProcess("ipconfig /flushdns");
+            runProcess("arp -d");
+        }
+        private void runProcess(String command)
+        {
+            Process cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.Start();
+
+            cmd.StandardInput.WriteLine(command);
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            Console.WriteLine(cmd.StandardOutput.ReadToEnd());
         }
     }
 }

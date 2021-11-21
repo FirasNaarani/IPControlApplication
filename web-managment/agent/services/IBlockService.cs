@@ -7,5 +7,6 @@ namespace agent.services
     {
         Boolean Block(AgentCommmand agentCommmand);
         Boolean Unblock(AgentCommmand agentCommmand);
+        Boolean isBlocked(AgentCommmand cmd);
     }
 }

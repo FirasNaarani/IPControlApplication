@@ -16,7 +16,8 @@ namespace agent.services
                 {
                     process.Kill();
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("cannot block application: {0}, error = {1}", agentCommmand.value, ex.Message);
                 return false;
@@ -25,6 +26,10 @@ namespace agent.services
         }
 
         public bool Unblock(AgentCommmand agentCommmand)
+        {
+            return true;
+        }
+        public bool isBlocked(AgentCommmand cmd)
         {
             return true;
         }
