@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import FirasPic from "./pics/firas.jpg";
+import MohmadPic from "./pics/mohmad.jpg";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -54,6 +55,42 @@ export default function Home() {
                           <td><Button size="small" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/firas_naarani/"><InstagramIcon/></Button></td>
                           <td><Button size="small" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/firas-naarani-961914225"><LinkedInIcon/></Button></td>
                           <td><Button size="small" target="_blank" rel="noopener noreferrer" href="https://github.com/FirasNaarani"><GitHubIcon/></Button></td>
+                        </tr>
+                      </table>
+                    </center>
+                  </CardActions>
+                </Paper>
+              </Card>
+            </Grid>
+            <Grid item xs>
+              <Card sx={{ maxWidth: 345 }}>
+                <Paper variant="outlined">
+                  <CardMedia
+                    component="img"
+                    height="350"
+                    image={MohmadPic}
+                    alt="Eng.Mohmad Ali Mosa"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      👨🏻‍💻🔹 Mohmad Adwi 🔹👨🏻‍💻
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <center>
+                      <table>
+                        <tr>
+                          <td className="aboutme" colSpan="2">
+                            🔘 | Software Engineer 💻
+                          </td>
+                          <td>
+                            <Button size="small" href="mailto:mohmad.mosa.1998@gmail.com"><EmailIcon /></Button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><Button size="small" target="_blank" rel="noopener noreferrer" href="https://wa.me/+972546683166"><WhatsAppIcon /></Button></td>
+                          <td><Button size="small" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/mohmad.ali.mosa/"><FacebookIcon/></Button></td>
+                          <td><Button size="small" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/mohmad.mosa.1998/"><InstagramIcon/></Button></td>
                         </tr>
                       </table>
                     </center>

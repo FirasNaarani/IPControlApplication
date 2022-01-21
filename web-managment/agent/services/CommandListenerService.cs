@@ -64,15 +64,31 @@ namespace agent.services
                         {
                             if (cmd.operationDurationMinutes == 0)
                             {
-                                if (!blockService.isBlocked(cmd))
+                                if (cmd.resourceType.ToString() == "Application")
                                 {
-                                    Console.WriteLine("trying to block(no expiration date): " + cmd.value);
-                                    blockService.Block(cmd);
-                                    Console.WriteLine("blocked: " + cmd.value);
+                                    if (blockService.isBlocked(cmd))
+                                    {
+                                        Console.WriteLine("trying to block(no expiration date): " + cmd.value);
+                                        blockService.Block(cmd);
+                                        Console.WriteLine("blocked: " + cmd.value);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("already blocked: " + cmd.value);
+                                    }
                                 }
                                 else
                                 {
-                                    Console.WriteLine("already blocked: " + cmd.value);
+                                    if (!blockService.isBlocked(cmd))
+                                    {
+                                        Console.WriteLine("trying to block(no expiration date): " + cmd.value);
+                                        blockService.Block(cmd);
+                                        Console.WriteLine("blocked: " + cmd.value);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("already blocked: " + cmd.value);
+                                    }
                                 }
                             }
                             else
